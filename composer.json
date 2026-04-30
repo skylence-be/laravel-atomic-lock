@@ -1,5 +1,5 @@
 {
-  "name": "theater/atomic-lock",
+  "name": "skylence/atomic-lock",
   "description": "A Laravel package for atomic locking to prevent race conditions across processes and servers",
   "type": "library",
   "license": "MIT",
