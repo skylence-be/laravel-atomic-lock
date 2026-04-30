@@ -31,7 +31,7 @@
     }
   },
   "require-dev": {
-    "captainhookphp/captainhook": "^5.23",
+    "captainhook/captainhook": "^5.23",
     "larastan/larastan": "^3.0",
     "laravel/pint": "^1.0",
     "orchestra/testbench": "^9.0|^10.0",
