@@ -30,5 +30,22 @@
       }
     }
   },
+  "require-dev": {
+    "captainhookphp/captainhook": "^5.23",
+    "larastan/larastan": "^3.0",
+    "laravel/pint": "^1.0",
+    "orchestra/testbench": "^9.0|^10.0",
+    "phpunit/phpunit": "^11.0",
+    "rector/rector": "^2.0"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test:types": "vendor/bin/phpstan --error-format=table",
+    "lint": "vendor/bin/pint",
+    "lint:check": "vendor/bin/pint --test",
+    "refactor": "vendor/bin/rector",
+    "refactor:check": "vendor/bin/rector --dry-run",
+    "hooks:install": "vendor/bin/captainhook install"
+  },
   "minimum-stability": "stable"
 }
