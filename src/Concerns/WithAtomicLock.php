@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Concerns;
+namespace Skylence\AtomicLock\Concerns;
 
 use Closure;
-use Theater\AtomicLock\Facades\AtomicLock;
-use Theater\AtomicLock\Support\LockResult;
+use Skylence\AtomicLock\Facades\AtomicLock;
+use Skylence\AtomicLock\Support\LockResult;
 
 trait WithAtomicLock
 {
@@ -24,7 +24,12 @@ trait WithAtomicLock
         ?int $ttl = null,
         ?Closure $callback = null,
     ): LockResult {
-        return AtomicLock::block($name, $waitSeconds, $ttl, callback: $callback);
+        return AtomicLock::block(
+            $name,
+            $waitSeconds,
+            $ttl,
+            callback: $callback,
+        );
     }
 
     protected function releaseLock(string $name): bool
@@ -32,8 +37,11 @@ trait WithAtomicLock
         return AtomicLock::release($name);
     }
 
-    protected function runWithLock(string $name, Closure $callback, ?int $ttl = null): mixed
-    {
+    protected function runWithLock(
+        string $name,
+        Closure $callback,
+        ?int $ttl = null,
+    ): mixed {
         $result = AtomicLock::acquire($name, $ttl, callback: $callback);
 
         if ($result->wasNotAcquired()) {

@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\OwnedLock;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\OwnedLock;
 
 class RestoreLockAction
 {
-    public function execute(string $name, string $owner, ?int $ttl = null): OwnedLock
-    {
+    public function execute(
+        string $name,
+        string $owner,
+        ?int $ttl = null,
+    ): OwnedLock {
         $ttl = $ttl ?? Config::getDefaultTtl();
         $lockName = $this->buildLockName($name);
 
@@ -31,9 +34,9 @@ class RestoreLockAction
         $data = OwnedLock::deserialize($serialized);
 
         return $this->execute(
-            name: $data['name'],
-            owner: $data['owner'],
-            ttl: $data['ttl'],
+            name: $data["name"],
+            owner: $data["owner"],
+            ttl: $data["ttl"],
         );
     }
 

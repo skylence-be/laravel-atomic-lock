@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Models;
+namespace Skylence\AtomicLock\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -12,21 +12,21 @@ class Lock extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'lockable_type',
-        'lockable_id',
-        'owner',
-        'reason',
-        'acquired_at',
-        'released_at',
-        'expires_at',
+        "lockable_type",
+        "lockable_id",
+        "owner",
+        "reason",
+        "acquired_at",
+        "released_at",
+        "expires_at",
     ];
 
     protected function casts(): array
     {
         return [
-            'acquired_at' => 'datetime',
-            'released_at' => 'datetime',
-            'expires_at' => 'datetime',
+            "acquired_at" => "datetime",
+            "released_at" => "datetime",
+            "expires_at" => "datetime",
         ];
     }
 
@@ -53,14 +53,14 @@ class Lock extends Model
     public function scopeActive($query)
     {
         return $query
-            ->whereNull('released_at')
-            ->where('expires_at', '>', now());
+            ->whereNull("released_at")
+            ->where("expires_at", ">", now());
     }
 
     public function scopeForLockable($query, Model $model)
     {
         return $query
-            ->where('lockable_type', $model->getMorphClass())
-            ->where('lockable_id', $model->getKey());
+            ->where("lockable_type", $model->getMorphClass())
+            ->where("lockable_id", $model->getKey());
     }
 }

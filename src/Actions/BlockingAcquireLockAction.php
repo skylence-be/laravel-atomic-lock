@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Closure;
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Events\LockAcquired;
-use Theater\AtomicLock\Exceptions\LockException;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\LockResult;
+use Skylence\AtomicLock\Events\LockAcquired;
+use Skylence\AtomicLock\Exceptions\LockException;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\LockResult;
 
 class BlockingAcquireLockAction
 {

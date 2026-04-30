@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Facades;
+namespace Skylence\AtomicLock\Facades;
 
 use Closure;
 use Illuminate\Support\Facades\Facade;
-use Theater\AtomicLock\Actions\AcquireLockAction;
-use Theater\AtomicLock\Actions\AcquireOwnedLockAction;
-use Theater\AtomicLock\Actions\BlockingAcquireLockAction;
-use Theater\AtomicLock\Actions\CheckLockStatusAction;
-use Theater\AtomicLock\Actions\ForceReleaseLockAction;
-use Theater\AtomicLock\Actions\RefreshLockAction;
-use Theater\AtomicLock\Actions\ReleaseLockAction;
-use Theater\AtomicLock\Actions\RestoreLockAction;
-use Theater\AtomicLock\Actions\SearchWithLockAction;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\LockResult;
-use Theater\AtomicLock\Support\LockStatus;
-use Theater\AtomicLock\Support\OwnedLock;
+use Skylence\AtomicLock\Actions\AcquireLockAction;
+use Skylence\AtomicLock\Actions\AcquireOwnedLockAction;
+use Skylence\AtomicLock\Actions\BlockingAcquireLockAction;
+use Skylence\AtomicLock\Actions\CheckLockStatusAction;
+use Skylence\AtomicLock\Actions\ForceReleaseLockAction;
+use Skylence\AtomicLock\Actions\RefreshLockAction;
+use Skylence\AtomicLock\Actions\ReleaseLockAction;
+use Skylence\AtomicLock\Actions\RestoreLockAction;
+use Skylence\AtomicLock\Actions\SearchWithLockAction;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\LockResult;
+use Skylence\AtomicLock\Support\LockStatus;
+use Skylence\AtomicLock\Support\OwnedLock;
 
 /**
  * @method static LockResult acquire(string $name, ?int $ttl = null, ?string $owner = null, ?Closure $callback = null)
@@ -36,7 +36,7 @@ class AtomicLock extends Facade
         ?string $owner = null,
         ?Closure $callback = null,
     ): LockResult {
-        $action = Config::getAction('acquire', AcquireLockAction::class);
+        $action = Config::getAction("acquire", AcquireLockAction::class);
 
         return $action->execute($name, $ttl, $owner, $callback);
     }
@@ -48,63 +48,89 @@ class AtomicLock extends Facade
         ?string $owner = null,
         ?Closure $callback = null,
     ): LockResult {
-        $action = Config::getAction('blocking_acquire', BlockingAcquireLockAction::class);
+        $action = Config::getAction(
+            "blocking_acquire",
+            BlockingAcquireLockAction::class,
+        );
 
         return $action->execute($name, $waitSeconds, $ttl, $owner, $callback);
     }
 
     public static function release(string $name, ?string $owner = null): bool
     {
-        $action = Config::getAction('release', ReleaseLockAction::class);
+        $action = Config::getAction("release", ReleaseLockAction::class);
 
         return $action->execute($name, $owner);
     }
 
     public static function forceRelease(string $name): void
     {
-        $action = Config::getAction('force_release', ForceReleaseLockAction::class);
+        $action = Config::getAction(
+            "force_release",
+            ForceReleaseLockAction::class,
+        );
 
         $action->execute($name);
     }
 
-    public static function refresh(string $name, ?int $ttl = null, ?string $owner = null): bool
-    {
-        $action = Config::getAction('refresh', RefreshLockAction::class);
+    public static function refresh(
+        string $name,
+        ?int $ttl = null,
+        ?string $owner = null,
+    ): bool {
+        $action = Config::getAction("refresh", RefreshLockAction::class);
 
         return $action->execute($name, $ttl, $owner);
     }
 
     public static function status(string $name): LockStatus
     {
-        $action = Config::getAction('check_status', CheckLockStatusAction::class);
+        $action = Config::getAction(
+            "check_status",
+            CheckLockStatusAction::class,
+        );
 
         return $action->execute($name);
     }
 
-    public static function acquireOwned(string $name, ?int $ttl = null): ?OwnedLock
-    {
-        $action = Config::getAction('acquire_owned', AcquireOwnedLockAction::class);
+    public static function acquireOwned(
+        string $name,
+        ?int $ttl = null,
+    ): ?OwnedLock {
+        $action = Config::getAction(
+            "acquire_owned",
+            AcquireOwnedLockAction::class,
+        );
 
         return $action->execute($name, $ttl);
     }
 
-    public static function restore(string $name, string $owner, ?int $ttl = null): OwnedLock
-    {
-        $action = Config::getAction('restore', RestoreLockAction::class);
+    public static function restore(
+        string $name,
+        string $owner,
+        ?int $ttl = null,
+    ): OwnedLock {
+        $action = Config::getAction("restore", RestoreLockAction::class);
 
         return $action->execute($name, $owner, $ttl);
     }
 
     public static function restoreFromToken(string $serialized): OwnedLock
     {
-        $action = Config::getAction('restore', RestoreLockAction::class);
+        $action = Config::getAction("restore", RestoreLockAction::class);
 
         return $action->fromSerialized($serialized);
     }
 
-    public static function searchWithLock(string $lockName, Closure $searchCallback, ?int $ttl = null): mixed
-    {
-        $action = Config::getAction('search_with_lock', SearchWithLockAction::class);
+    public static function searchWithLock(
+        string $lockName,
+        Closure $searchCallback,
+        ?int $ttl = null,
+    ): mixed {
+        $action = Config::getAction(
+            "search_with_lock",
+            SearchWithLockAction::class,
+        );
 
         return $action->execute($lockName, $searchCallback, $ttl);
     }

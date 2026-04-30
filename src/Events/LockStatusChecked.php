@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Events;
+namespace Skylence\AtomicLock\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use Theater\AtomicLock\Support\LockStatus;
+use Skylence\AtomicLock\Support\LockStatus;
 
 class LockStatusChecked
 {

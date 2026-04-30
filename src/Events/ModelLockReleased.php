@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Events;
+namespace Skylence\AtomicLock\Events;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
-use Theater\AtomicLock\Models\Lock;
+use Skylence\AtomicLock\Models\Lock;
 
 class ModelLockReleased
 {

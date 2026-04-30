@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Events\LockStatusChecked;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\LockStatus;
+use Skylence\AtomicLock\Events\LockStatusChecked;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\LockStatus;
 
 class CheckLockStatusAction
 {

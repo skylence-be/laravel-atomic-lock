@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Closure;
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\Config;
 
 class SearchWithLockAction
 {
-    public function execute(string $lockName, Closure $searchCallback, ?int $ttl = null): mixed
-    {
+    public function execute(
+        string $lockName,
+        Closure $searchCallback,
+        ?int $ttl = null,
+    ): mixed {
         $ttl = $ttl ?? Config::getDefaultTtl();
         $fullLockName = $this->buildLockName($lockName);
 
@@ -20,7 +23,7 @@ class SearchWithLockAction
 
         $acquired = $lock->get();
 
-        if (! $acquired) {
+        if (!$acquired) {
             return null;
         }
 

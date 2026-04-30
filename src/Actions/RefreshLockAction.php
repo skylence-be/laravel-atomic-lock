@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Events\LockRefreshed;
-use Theater\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Events\LockRefreshed;
+use Skylence\AtomicLock\Support\Config;
 
 class RefreshLockAction
 {
-    public function execute(string $name, ?int $ttl = null, ?string $owner = null): bool
-    {
+    public function execute(
+        string $name,
+        ?int $ttl = null,
+        ?string $owner = null,
+    ): bool {
         $ttl = $ttl ?? Config::getDefaultTtl();
         $lockName = $this->buildLockName($name);
 

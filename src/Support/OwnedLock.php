@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Support;
+namespace Skylence\AtomicLock\Support;
 
 use Illuminate\Contracts\Cache\Lock;
 
@@ -33,9 +33,9 @@ final class OwnedLock
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'owner' => $this->owner,
-            'ttl' => $this->ttl,
+            "name" => $this->name,
+            "owner" => $this->owner,
+            "ttl" => $this->ttl,
         ];
     }
 

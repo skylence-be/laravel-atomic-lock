@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock as CacheLock;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Events\ModelLockReleased;
-use Theater\AtomicLock\Models\Lock;
-use Theater\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Events\ModelLockReleased;
+use Skylence\AtomicLock\Models\Lock;
+use Skylence\AtomicLock\Support\Config;
 
 class ReleaseModelLockAction
 {
@@ -26,11 +26,11 @@ class ReleaseModelLockAction
             $lock = Lock::query()
                 ->forLockable($model)
                 ->active()
-                ->when($owner, fn ($q) => $q->where('owner', $owner))
+                ->when($owner, fn($q) => $q->where("owner", $owner))
                 ->first();
 
             if ($lock) {
-                $lock->update(['released_at' => now()]);
+                $lock->update(["released_at" => now()]);
                 ModelLockReleased::dispatch($model, $lock);
             }
         }

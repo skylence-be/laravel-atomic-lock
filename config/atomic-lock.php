@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use Theater\AtomicLock\Actions\AcquireLockAction;
-use Theater\AtomicLock\Actions\AcquireModelLockAction;
-use Theater\AtomicLock\Actions\AcquireOwnedLockAction;
-use Theater\AtomicLock\Actions\BlockingAcquireLockAction;
-use Theater\AtomicLock\Actions\CheckLockStatusAction;
-use Theater\AtomicLock\Actions\ForceReleaseLockAction;
-use Theater\AtomicLock\Actions\RefreshLockAction;
-use Theater\AtomicLock\Actions\ReleaseLockAction;
-use Theater\AtomicLock\Actions\ReleaseModelLockAction;
-use Theater\AtomicLock\Actions\RestoreLockAction;
-use Theater\AtomicLock\Actions\SearchWithLockAction;
+use Skylence\AtomicLock\Actions\AcquireLockAction;
+use Skylence\AtomicLock\Actions\AcquireModelLockAction;
+use Skylence\AtomicLock\Actions\AcquireOwnedLockAction;
+use Skylence\AtomicLock\Actions\BlockingAcquireLockAction;
+use Skylence\AtomicLock\Actions\CheckLockStatusAction;
+use Skylence\AtomicLock\Actions\ForceReleaseLockAction;
+use Skylence\AtomicLock\Actions\RefreshLockAction;
+use Skylence\AtomicLock\Actions\ReleaseLockAction;
+use Skylence\AtomicLock\Actions\ReleaseModelLockAction;
+use Skylence\AtomicLock\Actions\RestoreLockAction;
+use Skylence\AtomicLock\Actions\SearchWithLockAction;
 
 return [
     /*
@@ -24,7 +24,7 @@ return [
     | released, it will automatically expire after this duration.
     |
     */
-    'default_ttl' => env('ATOMIC_LOCK_DEFAULT_TTL', 10),
+    "default_ttl" => env("ATOMIC_LOCK_DEFAULT_TTL", 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ return [
     | Note: The 'array' driver only works within a single process.
     |
     */
-    'cache_store' => env('ATOMIC_LOCK_CACHE_STORE'),
+    "cache_store" => env("ATOMIC_LOCK_CACHE_STORE"),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ return [
     | other cache entries and makes locks easily identifiable.
     |
     */
-    'prefix' => env('ATOMIC_LOCK_PREFIX', 'atomic_lock'),
+    "prefix" => env("ATOMIC_LOCK_PREFIX", "atomic_lock"),
 
     /*
     |--------------------------------------------------------------------------
@@ -58,24 +58,24 @@ return [
     | you to extend or replace the default behavior with your own implementations.
     |
     */
-    'actions' => [
+    "actions" => [
         // String-based locks
-        'acquire' => AcquireLockAction::class,
-        'blocking_acquire' => BlockingAcquireLockAction::class,
-        'release' => ReleaseLockAction::class,
-        'force_release' => ForceReleaseLockAction::class,
-        'refresh' => RefreshLockAction::class,
-        'check_status' => CheckLockStatusAction::class,
+        "acquire" => AcquireLockAction::class,
+        "blocking_acquire" => BlockingAcquireLockAction::class,
+        "release" => ReleaseLockAction::class,
+        "force_release" => ForceReleaseLockAction::class,
+        "refresh" => RefreshLockAction::class,
+        "check_status" => CheckLockStatusAction::class,
 
         // Owned locks (for transfer between processes)
-        'acquire_owned' => AcquireOwnedLockAction::class,
-        'restore' => RestoreLockAction::class,
+        "acquire_owned" => AcquireOwnedLockAction::class,
+        "restore" => RestoreLockAction::class,
 
         // Search lock pattern (for workers)
-        'search_with_lock' => SearchWithLockAction::class,
+        "search_with_lock" => SearchWithLockAction::class,
 
         // Model-based locks (polymorphic)
-        'acquire_model' => AcquireModelLockAction::class,
-        'release_model' => ReleaseModelLockAction::class,
+        "acquire_model" => AcquireModelLockAction::class,
+        "release_model" => ReleaseModelLockAction::class,
     ],
 ];

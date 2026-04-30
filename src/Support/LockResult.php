@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Support;
+namespace Skylence\AtomicLock\Support;
 
 final readonly class LockResult
 {
@@ -20,6 +20,6 @@ final readonly class LockResult
 
     public function wasNotAcquired(): bool
     {
-        return ! $this->acquired;
+        return !$this->acquired;
     }
 }

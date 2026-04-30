@@ -1,34 +1,34 @@
 {
-    "name": "theater/atomic-lock",
-    "description": "A Laravel package for atomic locking to prevent race conditions across processes and servers",
-    "type": "library",
-    "license": "MIT",
-    "keywords": [
-        "laravel",
-        "atomic",
-        "lock",
-        "mutex",
-        "race-condition"
-    ],
-    "autoload": {
-        "psr-4": {
-            "Theater\\AtomicLock\\": "src/"
-        }
-    },
-    "require": {
-        "php": "^8.2",
-        "illuminate/support": "^11.0|^12.0",
-        "illuminate/cache": "^11.0|^12.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Theater\\AtomicLock\\AtomicLockServiceProvider"
-            ],
-            "aliases": {
-                "AtomicLock": "Theater\\AtomicLock\\Facades\\AtomicLock"
-            }
-        }
-    },
-    "minimum-stability": "stable"
+  "name": "theater/atomic-lock",
+  "description": "A Laravel package for atomic locking to prevent race conditions across processes and servers",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "atomic",
+    "lock",
+    "mutex",
+    "race-condition"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Skylence\\AtomicLock\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^11.0|^12.0",
+    "illuminate/cache": "^11.0|^12.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Skylence\\AtomicLock\\AtomicLockServiceProvider"
+      ],
+      "aliases": {
+        "AtomicLock": "Skylence\\AtomicLock\\Facades\\AtomicLock"
+      }
+    }
+  },
+  "minimum-stability": "stable"
 }

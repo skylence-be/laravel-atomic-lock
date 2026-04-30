@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Support;
+namespace Skylence\AtomicLock\Support;
 
 final readonly class LockStatus
 {
@@ -14,6 +14,6 @@ final readonly class LockStatus
 
     public function isAvailable(): bool
     {
-        return ! $this->isLocked;
+        return !$this->isLocked;
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Exceptions;
+namespace Skylence\AtomicLock\Exceptions;
 
 use Exception;
 
@@ -25,6 +25,8 @@ class LockException extends Exception
 
     public static function timeout(string $name, int $seconds): self
     {
-        return new self("Could not acquire lock [{$name}] within {$seconds} seconds");
+        return new self(
+            "Could not acquire lock [{$name}] within {$seconds} seconds",
+        );
     }
 }

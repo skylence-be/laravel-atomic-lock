@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock;
+namespace Skylence\AtomicLock;
 
 use Illuminate\Support\ServiceProvider;
-use Theater\AtomicLock\Actions\AcquireLockAction;
-use Theater\AtomicLock\Actions\AcquireModelLockAction;
-use Theater\AtomicLock\Actions\AcquireOwnedLockAction;
-use Theater\AtomicLock\Actions\BlockingAcquireLockAction;
-use Theater\AtomicLock\Actions\CheckLockStatusAction;
-use Theater\AtomicLock\Actions\ForceReleaseLockAction;
-use Theater\AtomicLock\Actions\RefreshLockAction;
-use Theater\AtomicLock\Actions\ReleaseLockAction;
-use Theater\AtomicLock\Actions\ReleaseModelLockAction;
-use Theater\AtomicLock\Actions\RestoreLockAction;
-use Theater\AtomicLock\Actions\SearchWithLockAction;
+use Skylence\AtomicLock\Actions\AcquireLockAction;
+use Skylence\AtomicLock\Actions\AcquireModelLockAction;
+use Skylence\AtomicLock\Actions\AcquireOwnedLockAction;
+use Skylence\AtomicLock\Actions\BlockingAcquireLockAction;
+use Skylence\AtomicLock\Actions\CheckLockStatusAction;
+use Skylence\AtomicLock\Actions\ForceReleaseLockAction;
+use Skylence\AtomicLock\Actions\RefreshLockAction;
+use Skylence\AtomicLock\Actions\ReleaseLockAction;
+use Skylence\AtomicLock\Actions\ReleaseModelLockAction;
+use Skylence\AtomicLock\Actions\RestoreLockAction;
+use Skylence\AtomicLock\Actions\SearchWithLockAction;
 
 class AtomicLockServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/atomic-lock.php',
-            'atomic-lock'
+            __DIR__ . "/../config/atomic-lock.php",
+            "atomic-lock",
         );
 
         $this->registerActions();
@@ -32,13 +32,23 @@ class AtomicLockServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/atomic-lock.php' => config_path('atomic-lock.php'),
-            ], 'atomic-lock-config');
+            $this->publishes(
+                [
+                    __DIR__ . "/../config/atomic-lock.php" => config_path(
+                        "atomic-lock.php",
+                    ),
+                ],
+                "atomic-lock-config",
+            );
 
-            $this->publishesMigrations([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
-            ], 'atomic-lock-migrations');
+            $this->publishesMigrations(
+                [
+                    __DIR__ . "/../database/migrations" => database_path(
+                        "migrations",
+                    ),
+                ],
+                "atomic-lock-migrations",
+            );
         }
     }
 

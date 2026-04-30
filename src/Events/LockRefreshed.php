@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Events;
+namespace Skylence\AtomicLock\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Theater\AtomicLock\Events\LockAcquired;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\OwnedLock;
+use Skylence\AtomicLock\Events\LockAcquired;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\OwnedLock;
 
 class AcquireOwnedLockAction
 {
@@ -23,7 +23,7 @@ class AcquireOwnedLockAction
 
         $acquired = $lock->get();
 
-        if (! $acquired) {
+        if (!$acquired) {
             return null;
         }
 
@@ -34,12 +34,15 @@ class AcquireOwnedLockAction
             lock: $lock,
         );
 
-        LockAcquired::dispatch($name, new \Theater\AtomicLock\Support\LockResult(
-            acquired: true,
-            name: $name,
-            owner: $owner,
-            ttl: $ttl,
-        ));
+        LockAcquired::dispatch(
+            $name,
+            new \Skylence\AtomicLock\Support\LockResult(
+                acquired: true,
+                name: $name,
+                owner: $owner,
+                ttl: $ttl,
+            ),
+        );
 
         return $ownedLock;
     }

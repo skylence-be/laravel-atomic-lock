@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Theater\AtomicLock\Actions;
+namespace Skylence\AtomicLock\Actions;
 
 use Illuminate\Contracts\Cache\Lock as CacheLock;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use Theater\AtomicLock\Events\ModelLockAcquired;
-use Theater\AtomicLock\Models\Lock;
-use Theater\AtomicLock\Support\Config;
-use Theater\AtomicLock\Support\LockResult;
+use Skylence\AtomicLock\Events\ModelLockAcquired;
+use Skylence\AtomicLock\Models\Lock;
+use Skylence\AtomicLock\Support\Config;
+use Skylence\AtomicLock\Support\LockResult;
 
 class AcquireModelLockAction
 {
@@ -31,12 +31,12 @@ class AcquireModelLockAction
         if ($acquired) {
             // Track in database for history/relationships
             $lock = Lock::create([
-                'lockable_type' => $model->getMorphClass(),
-                'lockable_id' => $model->getKey(),
-                'owner' => $owner,
-                'reason' => $reason,
-                'acquired_at' => now(),
-                'expires_at' => now()->addSeconds($ttl),
+                "lockable_type" => $model->getMorphClass(),
+                "lockable_id" => $model->getKey(),
+                "owner" => $owner,
+                "reason" => $reason,
+                "acquired_at" => now(),
+                "expires_at" => now()->addSeconds($ttl),
             ]);
 
             ModelLockAcquired::dispatch($model, $lock);
@@ -59,8 +59,11 @@ class AcquireModelLockAction
         return "{$prefix}:model:{$type}:{$id}";
     }
 
-    protected function getCacheLock(string $name, int $ttl, ?string $owner): CacheLock
-    {
+    protected function getCacheLock(
+        string $name,
+        int $ttl,
+        ?string $owner,
+    ): CacheLock {
         $store = Config::getCacheStore();
         $cache = $store ? Cache::store($store) : Cache::store();
 
